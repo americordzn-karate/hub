@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Senshikan — Portal Central</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:        #0a0c10;
+      --surface:   #111520;
+      --border:    rgba(180,145,60,0.25);
+      --gold:      #c9a84c;
+      --gold-light:#e8ca7a;
+      --gold-dim:  rgba(201,168,76,0.12);
+      --text:      #e8e0d0;
+      --muted:     #8a8070;
+      --radius:    18px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* ── Fondo decorativo ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 10%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 90%, rgba(201,168,76,0.05) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Líneas de cuadrícula sutil */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    /* ── Encabezado ── */
+    header {
+      text-align: center;
+      animation: fadeDown .8s ease both;
+    }
+
+    .kamon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+      opacity: .85;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--gold-light);
+      text-shadow: 0 0 30px rgba(201,168,76,0.35);
+    }
+
+    .subtitle {
+      margin-top: .5rem;
+      font-size: .82rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── Divisor dorado ── */
+    .divider {
+      width: 100%;
+      max-width: 420px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .5;
+      animation: fadeIn 1s .3s ease both;
+    }
+
+    /* ── Grid de tarjetas ── */
+    .grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    /* tarjeta principal ocupa todo el ancho */
+    .card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      padding: 1.15rem 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, var(--gold-dim), transparent 60%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      border-radius: inherit;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(201,168,76,0.55);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.12), 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .card:active { transform: translateY(-1px); }
+
+    /* ícono SVG */
+    .icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .25s, border-color .25s;
+    }
+
+    .card:hover .icon {
+      background: rgba(201,168,76,0.2);
+      border-color: rgba(201,168,76,0.6);
+    }
+
+    .icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .info { flex: 1; min-width: 0; position: relative; z-index: 1; }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: .05em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-desc {
+      margin-top: .2rem;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      color: var(--muted);
+      transition: color .25s, transform .25s;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover .arrow { color: var(--gold); transform: translateX(3px); }
+
+    /* ── Pie ── */
+    footer {
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      animation: fadeIn 1s .6s ease both;
+    }
+
+    /* ── Animaciones ── */
+    @keyframes fadeDown  { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:none; } }
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(18px);  } to { opacity:1; transform:none; } }
+    @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
+
+    /* ── Responsive estrecho ── */
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: 1fr; }
+      .card:first-child { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Encabezado -->
+  <header>
+    <!-- Kamon / emblema SVG simple -->
+    <svg class="kamon" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="28" cy="28" r="26" stroke="#c9a84c" stroke-width="1.4" opacity=".6"/>
+      <circle cx="28" cy="28" r="18" stroke="#c9a84c" stroke-width="1" opacity=".4"/>
+      <path d="M28 10 L30.5 24 L44 20 L34 30 L44 36 L30.5 32 L28 46 L25.5 32 L12 36 L22 30 L12 20 L25.5 24 Z"
+            fill="#c9a84c" opacity=".75"/>
+    </svg>
+    <h1>Senshikan</h1>
+    <p class="subtitle">Portal de Acceso Central</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- Tarjetas -->
+  <nav class="grid" aria-label="Menú principal">
+
+    <!-- Sitio Web -->
+    <a class="card" href="https://www.senshikan.com" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Sitio Web</div>
+        <div class="card-desc">senshikan.com — Página principal</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- Portal de Retos -->
+    <a class="card" href="https://americordzn-karate.github.io/retos/" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Portal de Retos</div>
+        <div class="card-desc">Gestión y seguimiento de retos</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- Inyectar Puntos -->
+    <a class="card" href="https://americordzn-karate.github.io/inyectar/" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Inyectar Puntos</div>
+        <div class="card-desc">Registro y asignación de puntos</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- Evaluaciones -->
+    <a class="card" href="https://americordzn-karate.github.io/examenes/" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Evaluaciones</div>
+        <div class="card-desc">Exámenes y calificaciones</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- Senshi-Tools -->
+    <a class="card" href="https://americordzn-karate.github.io/examenes/" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Senshi-Tools</div>
+        <div class="card-desc">Herramientas auxiliares</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </nav>
+
+  <footer>© Senshikan Dojo &nbsp;·&nbsp; Todos los derechos reservados</footer>
+
+</div>
+</body>
+</html>
