@@ -419,8 +419,8 @@
       <span class="arrow more">⌄</span>
     </button>
 
-    <!-- Asistencias -->
-<a class="card" href="https://americordzn-karate.github.io/asistencia/" target="_blank" rel="noopener">
+   <!-- Asistencias (submenú) -->
+<button type="button" class="card" data-menu="asist" aria-haspopup="dialog">
   <div class="icon">
     <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
   </div>
@@ -428,8 +428,8 @@
     <div class="card-title">Asistencias</div>
     <div class="card-desc">Control de asistencia</div>
   </div>
-  <span class="arrow">›</span>
-</a>
+  <span class="arrow more">⌄</span>
+</button>
 
     <!-- Senshi-Tools -->
     <a class="card" href="https://www.senshikan.com/tools" target="_blank" rel="noopener">
@@ -478,7 +478,14 @@
         { label: 'Senshi-Kan', url: 'https://americordzn-karate.github.io/examenes/' },
         { label: 'Quiroz',     url: 'https://americordzn-karate.github.io/quiroz/' }
       ]
-    }
+    },
+    asist: {
+    title: 'Asistencias',
+    items: [
+      { label: 'NFC y QR', url: 'https://americordzn-karate.github.io/asistencia/' },
+      { label: 'Poli',     url: 'https://americordzn-karate.github.io/poli/' }
+    ]
+  }
   };
 
   const overlay  = document.getElementById('overlay');
