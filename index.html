@@ -65,7 +65,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.5rem;
+      gap: 1.8rem;
     }
 
     /* ── Encabezado ── */
@@ -75,15 +75,15 @@
     }
 
     .kamon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1rem;
+      width: 40px;
+      height: 40px;
+      margin: 0 auto .6rem;
       opacity: .85;
     }
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-size: clamp(1.25rem, 4vw, 1.8rem);
       font-weight: 700;
       letter-spacing: .12em;
       color: var(--gold-light);
@@ -91,9 +91,9 @@
     }
 
     .subtitle {
-      margin-top: .5rem;
-      font-size: .82rem;
-      letter-spacing: .22em;
+      margin-top: .35rem;
+      font-size: .68rem;
+      letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--muted);
       font-weight: 400;
@@ -407,18 +407,6 @@
       <span class="arrow">›</span>
     </a>
 
-    <!-- Inyectar Puntos -->
-    <a class="card" href="https://americordzn-karate.github.io/inyectar/" target="_blank" rel="noopener">
-      <div class="icon">
-        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <div class="info">
-        <div class="card-title">Inyectar Puntos</div>
-        <div class="card-desc">Registro y asignación de puntos</div>
-      </div>
-      <span class="arrow">›</span>
-    </a>
-
     <!-- Evaluaciones (submenú) -->
     <button type="button" class="card" data-menu="eval" aria-haspopup="dialog">
       <div class="icon">
@@ -442,6 +430,30 @@
       </div>
       <span class="arrow more">⌄</span>
     </button>
+
+    <!-- Pedidos Nexus -->
+    <a class="card" href="https://americordzn-karate.github.io/pedidos" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Pedidos Nexus</div>
+        <div class="card-desc">Gestión de pedidos</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <!-- Inyectar Puntos -->
+    <a class="card" href="https://americordzn-karate.github.io/inyectar/" target="_blank" rel="noopener">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+      <div class="info">
+        <div class="card-title">Inyectar Puntos</div>
+        <div class="card-desc">Registro y asignación de puntos</div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
     <!-- Senshi-Tools -->
     <a class="card" href="https://www.senshikan.com/tools" target="_blank" rel="noopener">
